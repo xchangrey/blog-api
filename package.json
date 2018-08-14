@@ -1,0 +1,20 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "This is a blog API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Christian Geroy",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
+  }
+}
