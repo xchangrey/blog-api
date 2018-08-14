@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 const Author = require('./models/Author');
 const Post = require('./models/Post');
 
+//Connect to the server
 const port = process.env.PORT || 5000;
-
 app.listen(port, () => console.log(`Blog API is started at port ${port}`));
 
