@@ -2,6 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+//Routers
+const authors = require('./routes/api/author');
+const posts = require('./routes/api/post');
+
 //DB Config
 const db = require('./config/keys').mongoURI;
 
@@ -16,9 +20,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
-//Models
-const Author = require('./models/Author');
-const Post = require('./models/Post');
+// Use Routes
+app.use('/authors', authors);
+app.use('/posts', posts);
 
 //Connect to the server
 const port = process.env.PORT || 5000;

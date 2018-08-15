@@ -16,10 +16,12 @@ const author = new Schema({
     type: Number,
     default: 0
   },
-  posts: [{
-    type: ObjectId,
-    ref: 'Post'
-  }]
+}, { toObject: { virtuals: true } }, { toJSON: { virtuals: true } });
+
+author.virtual('posts', {
+  ref: 'Post',
+  localField: '_id',
+  foreignField: 'author'
 });
 
 module.exports = mongoose.model('Author', author);
