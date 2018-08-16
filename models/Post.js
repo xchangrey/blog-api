@@ -10,7 +10,8 @@ const post = new Schema({
   body: String,
   author: {
     type: ObjectId,
-    ref: 'Author'
+    ref: 'Author',
+    required: true
   },
   date: {
     type: Date,

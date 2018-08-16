@@ -14,7 +14,7 @@ router.post('/', (req,res) => {
   newAuthor.name = req.body.name;
   newAuthor.email = req.body.email;
   newAuthor.save((err, author) => {
-    err ? res.status(500).send({error: `Could not add author`}) : res.send(author);
+    err ? res.status(500).send({err}) : res.send(author);
   });
 });
 

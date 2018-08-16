@@ -5,9 +5,13 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const author = new Schema({
   name: {
     type: String,
-    default: 'Blogger'
+    default: 'Blogger',
+    required: true
   },
-  email: String,
+  email: {
+    type: String,
+    required: true
+  },
   follower: {
     type: Number,
     default: 0

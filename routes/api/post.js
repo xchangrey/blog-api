@@ -45,8 +45,6 @@ router.get('/post/:id', (req, res) => {
 });
 
 
-
-
 // @route   PUT /posts/id
 // @desc    Edit A Post
 // @access  Public
