@@ -36,7 +36,7 @@ router.get('/', (req, res) => {
 // @desc    GET All Posts
 // @access  Public
 
-router.get('/post/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   Post.findOne({_id: req.params.id})
     .populate('author', 'name email')
     .exec((err, post) => {
