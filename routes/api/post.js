@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 
 
 // @route   GET /posts/id
-// @desc    GET All Posts
+// @desc    GET A Single Post
 // @access  Public
 
 router.get('/:id', (req, res) => {
