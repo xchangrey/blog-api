@@ -28,7 +28,7 @@ router.get('/',(req,res) => {
     .then(authors => res.json(authors));
 });
 
-// @route   GET /authors/id
+// @route   GET /authors/{id}
 // @desc    Get A Single Author
 // @access  Public
 
@@ -40,7 +40,7 @@ router.get('/:id', (req,res) => {
   });
 })
 
-// @route   PUT /authors
+// @route   PUT /authors/{id}
 // @desc    Edit an Author
 // @access  Public
 
@@ -54,7 +54,7 @@ router.put('/:id', (req,res) => {
   });
 });
 
-// @route   DELETE /authors
+// @route   DELETE /authors/{id}
 // @desc    Delete an Author
 // @access  Public
 

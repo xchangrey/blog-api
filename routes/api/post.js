@@ -19,7 +19,7 @@ router.post('/', (req,res) => {
   });
 });
 
-// @route   GET /posts/id
+// @route   GET /posts
 // @desc    GET All Posts
 // @access  Public
 
@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
 });
 
 
-// @route   GET /posts/id
+// @route   GET /posts/{id}
 // @desc    GET A Single Post
 // @access  Public
 
@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-// @route   PUT /posts/id
+// @route   PUT /posts/{id}
 // @desc    Edit A Post
 // @access  Public
 
@@ -60,8 +60,8 @@ router.put('/:id', (req, res) => {
   });
 });
 
-// @route   DELETE /authors
-// @desc    Delete an Author
+// @route   DELETE /posts/{id}
+// @desc    Delete A Post
 // @access  Public
 
 router.delete('/:id', (req, res) => {
