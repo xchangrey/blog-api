@@ -24,6 +24,7 @@ router.post('/', (req,res) => {
 
 router.get('/',(req,res) => {
   Author.find()
+    .populate("posts", "title date body")
     .then(authors => res.json(authors));
 });
 

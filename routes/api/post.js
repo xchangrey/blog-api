@@ -19,8 +19,8 @@ router.post('/', (req,res) => {
   });
 });
 
-// @route   GET /posts
-// @desc    GET A Single Post
+// @route   GET /posts/id
+// @desc    GET All Posts
 // @access  Public
 
 router.get('/', (req, res) => {
@@ -32,18 +32,34 @@ router.get('/', (req, res) => {
 });
 
 
+// @route   GET /posts/id
+// @desc    GET All Posts
+// @access  Public
+
+router.get('/post/:id', (req, res) => {
+  Post.findOne({_id: req.params.id})
+    .populate('author', 'name email')
+    .exec((err, post) => {
+      err ? res.status(500).send({ error: `Could not fetch posts` }) : res.send(post);
+    });
+});
+
+
+
+
 // @route   PUT /posts/id
 // @desc    Edit A Post
 // @access  Public
 
 router.put('/:id', (req, res) => {
-  Author.findByIdAndUpdate(
-    req.params.id,
-    {$set:{name: req.body.title, email: req.body.body}},
-    {new: true},
-    (err, author) => {
-      err ? res.status(500).send({ error: `Could not update an post` }) : res.send(`Success! Post is updated...`);
+  Post.findById({_id: req.params.id}, (err, post) => {
+    if(err) return handleError(err);
+    post.title = req.body.title;
+    post.body = req.body.body;
+    post.save((err, updatedPost) => {
+      err ? res.status(500).send({error: `Could not update post`}) : res.send(`Success! Post is Updated`);
     });
+  });
 });
 
 // @route   DELETE /authors
