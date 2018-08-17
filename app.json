@@ -1,0 +1,6 @@
+{
+  "name":"Blog API",
+  "description": "A blog API in Node.js using Express",
+  "repository": "https://github.com/xchangrey/blog-api",
+  "keywords": ["node", "express", "restapi"]
+}
