@@ -12,7 +12,7 @@ export default function(state = initialState, action) {
         ...state,
         posts: action.payload,
         loading: false
-      }
+      };
     case DELETE_POST:
       return { 
         ...state, 

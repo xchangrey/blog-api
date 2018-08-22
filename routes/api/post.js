@@ -10,13 +10,14 @@ const Post = require("../../models/Post");
 // @access  Public
 
 router.post('/', (req,res) => {
-  const newPost = new Post();
-  newPost.title = req.body.title;
-  newPost.body = req.body.body;
-  newPost.author = req.body.author;
-  newPost.save((err, post) => {
-    err ? res.status(500).send(({error: `Could not save post`})) : res.send(post);
+  const newPost = new Post({
+    title: req.body.title,
+    body: req.body.body,
+    author: req.body.author
   });
+  newPost.save()
+  .then(post => res.json(post))
+  .catch(err => console.log({err}))
 });
 
 // @route   GET /posts

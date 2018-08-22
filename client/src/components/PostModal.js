@@ -47,7 +47,8 @@ class PostModal extends Component {
   };
 
   render(){
-    return <div>
+    return (
+      <div>
         <Button color="dark" style={{ marginBottom: "2rem" }} onClick={this.toggle}>
           Add Post
         </Button>
@@ -75,7 +76,8 @@ class PostModal extends Component {
             </Form>
           </ModalBody>
         </Modal>
-      </div>;
+      </div>
+      );
   }
 
 }
