@@ -24,11 +24,11 @@ export const addPost = post => dispatch => {
     );
 };
 
-export const deletePost = (id) => {
-  return {
-    type: DELETE_POST,
-    payload: id
-  };
+export const deletePost = id => dispatch => {
+ axios.delete(`/posts/${id}`).then(res => dispatch({
+   type: DELETE_POST,
+   payload: id
+ }))
 };
 
 export const setPostsLoading = () => {

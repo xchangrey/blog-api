@@ -19,7 +19,7 @@ class PostList extends Component {
     this.props.getPosts();
   }
 
-  onDeleteClick = (id) => {
+  onDeleteClick = id => {
     this.props.deletePost(id);
   }
 
@@ -29,7 +29,7 @@ class PostList extends Component {
       <Container>
         <ListGroup>
           <TransitionGroup className="post-list">
-            {posts.map(({_id, title, body}) => (
+            {posts.map(({ _id, title, body }) => (
               <CSSTransition key={_id} timeout={500} classNames="fade">
                 <ListGroupItem>
                   <Button
@@ -60,7 +60,7 @@ PostList.propTypes = {
 
 const mapStateToProps = (state) => ({
   post: state.post
-})
+}); 
 
 
 export default connect(mapStateToProps, { getPosts, deletePost }) (PostList);

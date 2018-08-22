@@ -11,7 +11,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addPost } from '../actions/postActions';
-import PropTypes from 'prop-types';
 
 class PostModal extends Component {
   state = {
@@ -19,7 +18,7 @@ class PostModal extends Component {
     title: '',
     body: '',
     author: ''
-  }
+  };
 
   toggle = () => {
     this.setState({
@@ -27,7 +26,7 @@ class PostModal extends Component {
     });
   }
 
-  onChange =(e) => {
+  onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -43,8 +42,9 @@ class PostModal extends Component {
     // Add via addPost action
     this.props.addPost(newPost);
 
+    //Close the modal
     this.toggle();
-  }
+  };
 
   render(){
     return <div>
@@ -80,10 +80,6 @@ class PostModal extends Component {
 
 }
 
-PostModal.propTypes = {
-  addPost: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   post: state.post
