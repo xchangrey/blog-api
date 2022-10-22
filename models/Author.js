@@ -1,31 +1,34 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const author = new Schema({
-  name: {
-    type: String,
-    default: 'Blogger',
-    required: true
+const author = new Schema(
+  {
+    name: {
+      type: String,
+      default: 'Blogger',
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    follower: {
+      type: Number,
+      default: 0,
+    },
+    following: {
+      type: Number,
+      default: 0,
+    },
   },
-  email: {
-    type: String,
-    required: true
-  },
-  follower: {
-    type: Number,
-    default: 0
-  },
-  following: {
-    type: Number,
-    default: 0
-  },
-}, { toObject: { virtuals: true } }, { toJSON: { virtuals: true } });
+  { toObject: { virtuals: true } },
+  { toJSON: { virtuals: true } }
+);
 
 author.virtual('posts', {
   ref: 'Post',
   localField: '_id',
-  foreignField: 'author'
+  foreignField: 'author',
 });
 
 module.exports = mongoose.model('Author', author);

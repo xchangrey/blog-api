@@ -1,73 +1,86 @@
-const express = require("express");
+// Core
+const express = require('express');
 const router = express.Router();
 
-//Models
-const Author = require("../../models/Author");
-const Post = require("../../models/Post");
+//Model
+const Post = require('../../models/Post');
 
-// @route   POST /posts
-// @desc    Create A Post
-// @access  Public
-
-router.post('/', (req,res) => {
+/**
+ * Creates a new post.
+ * @route /posts
+ */
+router.post('/', (req, res) => {
+  const { title, body, author } = req.body;
   const newPost = new Post();
-  newPost.title = req.body.title;
-  newPost.body = req.body.body;
-  newPost.author = req.body.author;
+
+  newPost.title = title;
+  newPost.body = body;
+  newPost.author = author;
   newPost.save((err, post) => {
-    err ? res.status(500).send(({error: `Could not save post`})) : res.send(post);
+    err
+      ? res.status(500).send({ error: `Could not save post` })
+      : res.send(post);
   });
 });
 
-// @route   GET /posts
-// @desc    GET All Posts
-// @access  Public
-
+/**
+ * Retrieves all posts.
+ * @route /posts
+ */
 router.get('/', (req, res) => {
   Post.find()
     .populate('author', 'name email')
     .exec((err, posts) => {
-      err ? res.status(500).send({error: `Could not fetch posts`}) : res.send(posts);
+      err
+        ? res.status(500).send({ error: `Could not fetch posts` })
+        : res.send(posts);
     });
 });
 
-
-// @route   GET /posts/{id}
-// @desc    GET A Single Post
-// @access  Public
-
+/**
+ * Retrieves a single post.
+ * @route /posts/{id}
+ */
 router.get('/:id', (req, res) => {
-  Post.findOne({_id: req.params.id})
+  Post.findOne({ _id: req.params.id })
     .populate('author', 'name email')
     .exec((err, post) => {
-      err ? res.status(500).send({ error: `Could not fetch posts` }) : res.send(post);
+      err
+        ? res.status(500).send({ error: `Could not fetch posts` })
+        : res.send(post);
     });
 });
 
-
-// @route   PUT /posts/{id}
-// @desc    Edit A Post
-// @access  Public
-
+/**
+ * Updates a single post.
+ * @route /posts/{id}
+ */
 router.put('/:id', (req, res) => {
-  Post.findById({_id: req.params.id}, (err, post) => {
-    if(err) return handleError(err);
+  Post.findById({ _id: req.params.id }, (err, post) => {
+    if (err) return err;
+    
     post.title = req.body.title;
     post.body = req.body.body;
     post.save((err, updatedPost) => {
-      err ? res.status(500).send({error: `Could not update post`}) : res.send(`Success! Post is Updated`);
+      err
+        ? res.status(500).send({ error: `Could not update post` })
+        : res.send(`Success! Post ${updatedPost.title} is Updated`);
     });
   });
 });
 
-// @route   DELETE /posts/{id}
-// @desc    Delete A Post
-// @access  Public
-
+/**
+ * Deletes a post.
+ * @route /posts/{id}
+ */
 router.delete('/:id', (req, res) => {
   Post.findById(req.params.id)
-    .then(post => post.remove().then(() => res.json({ success: `Post is removed` })))
-    .catch(err => res.status(500).json({ error: `Error: Unable to delete Post` }))
+    .then(post =>
+      post.remove().then(() => res.json({ success: `Post is removed` }))
+    )
+    .catch(err =>
+      res.status(500).json({ error: `Error: Unable to delete Post` })
+    );
 });
 
 module.exports = router;
